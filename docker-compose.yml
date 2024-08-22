@@ -1,0 +1,19 @@
+version: '3'
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    command: python manage.py runserver 0.0.0.0:8000
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=car_app
+      - POSTGRES_USER=car_app
+      - POSTGRES_PASSWORD=car_app
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:
